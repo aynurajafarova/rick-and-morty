@@ -1,0 +1,45 @@
+@import "../../../../shared/assets/styles/variables";
+
+%common-margins {
+  margin: 15px 0px;
+}
+
+%common-text-color {
+  color: var(--primary-yellow);
+}
+
+.rick-and-morty__character_card {
+  border-radius: $radius;
+  background-color: var(--primary-dark-gray);
+  cursor: $cursor;
+  box-sizing: border-box;
+  padding: 10px;
+  box-shadow: var(--primary-light-gray) 0px 1px 4px;
+  &_name {
+    font-size: 1.5rem;
+    height: 50px;
+    @extend %common-text-color;
+    font-weight: 600;
+    @extend %common-margins;
+  }
+  &_image {
+    width: 230px;
+    margin: 10px auto;
+    display: flex;
+    border-radius: 15px;
+    overflow: hidden;
+    img {
+      width: 100%;
+    }
+  }
+  &_info {
+    @extend %common-margins;
+    p {
+      @extend %common-text-color;
+      margin: 10px 0px;
+      span {
+        color: var(--primary-light-gray);
+      }
+    }
+  }
+}

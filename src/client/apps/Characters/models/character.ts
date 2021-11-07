@@ -11,6 +11,7 @@ export interface ICharacterItemOrigin {
 }
 
 export interface ICharacterItemLocation extends ICharacterItemOrigin {}
+
 export interface ICharacterItem {
   created?: string;
   episode?: string[];

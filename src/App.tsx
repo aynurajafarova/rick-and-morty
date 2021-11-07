@@ -1,11 +1,10 @@
-import { FC, useEffect, lazy, Suspense } from "react";
-import { connect } from "react-redux";
+import { FC, lazy, Suspense } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { Container } from "@mui/material";
 
 import Navigation from "./client/shared/components/Navigation/index";
 import Header from "./client/shared/components/Header/index";
 import { ITabItem } from "./client/shared/models";
-import { fetchCharactersList } from "./client/apps/characters/api/index";
 import { ROUTES } from "./client/shared/routes/consts";
 
 const CharactersPage = lazy(
@@ -23,32 +22,18 @@ const AppRoutes: FC = () => (
   </BrowserRouter>
 );
 
-const App: FC = ({ fetchCharactersList, characters }: any) => {
+const App: FC = () => {
   const tabs: ITabItem[] = [{ label: "Characters" }, { label: "Episodes" }];
-
-  useEffect(() => {
-    fetchCharactersList();
-  }, []);
 
   return (
     <div className="app">
       <Header title="Rick and Morty" />
       <Navigation {...{ tabs }} />
-      <AppRoutes />
+      <Container maxWidth="lg">
+        <AppRoutes />
+      </Container>
     </div>
   );
 };
 
-const mapStateToProps = (state: any) => {
-  return {
-    characters: state.charactersData.characters,
-  };
-};
-
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    fetchCharactersList: () => dispatch(fetchCharactersList()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
