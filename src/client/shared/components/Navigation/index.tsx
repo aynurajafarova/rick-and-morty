@@ -22,9 +22,9 @@ const Navigation: FC<IProps> = ({ tabs }) => {
     <Box
       sx={{
         maxWidth: 225,
-        bgcolor: "background.paper",
         margin: "0 auto",
       }}
+      className="rick-and-morty__navigation"
     >
       <Tabs
         value={value}
@@ -33,8 +33,8 @@ const Navigation: FC<IProps> = ({ tabs }) => {
         scrollButtons={false}
         aria-label="scrollable prevent tabs example"
       >
-        {tabs?.map(({ label }: ITabItem) => {
-          return <Tab label={label} />;
+        {tabs?.map(({ label }: ITabItem, index: number) => {
+          return <Tab key={index} {...{ label }} />;
         })}
       </Tabs>
     </Box>

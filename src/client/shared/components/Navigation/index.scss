@@ -1,0 +1,20 @@
+@import "../../assets/styles/variables";
+
+.rick-and-morty {
+  &__navigation {
+    background-color: var(--primary-dark-gray);
+    border-radius: $radius;
+    overflow: hidden;
+    .Mui-selected {
+      color: var(--primary-yellow) !important;
+    }
+    .css-1aquho2-MuiTabs-indicator {
+      background-color: var(--primary-yellow);
+    }
+    .MuiTab-textColorPrimary {
+      color: var(--primary-light-gray);
+      text-transform: capitalize;
+      font-size: 16px;
+    }
+  }
+}
