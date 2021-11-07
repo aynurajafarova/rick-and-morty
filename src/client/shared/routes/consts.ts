@@ -5,4 +5,7 @@ export const ROUTES = {
   CHARACTERS: {
     PATH: "/characters",
   },
+  EPISODES: {
+    PATH: "/episodes",
+  },
 };

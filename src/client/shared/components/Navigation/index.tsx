@@ -1,4 +1,5 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
@@ -13,6 +14,14 @@ interface IProps {
 
 const Navigation: FC<IProps> = ({ tabs }) => {
   const [value, setValue] = useState<number>(0);
+
+  const history = useHistory();
+
+  useEffect(() => {
+    tabs?.map(({ url, value }: ITabItem) => {
+      if (history.location.pathname === url) setValue(value as number);
+    });
+  }, []);
 
   const handleChange = (event: any, newValue: number) => {
     setValue(newValue);
@@ -32,8 +41,16 @@ const Navigation: FC<IProps> = ({ tabs }) => {
         scrollButtons={false}
         aria-label="scrollable prevent tabs example"
       >
-        {tabs?.map(({ label }: ITabItem, index: number) => {
-          return <Tab key={index} {...{ label }} />;
+        {tabs?.map(({ label, url }: ITabItem, index: number) => {
+          return (
+            <Tab
+              key={index}
+              {...{ label }}
+              onClick={() => {
+                history.push(url as string);
+              }}
+            />
+          );
         })}
       </Tabs>
     </Box>

@@ -1,3 +1,5 @@
 export interface ITabItem {
-    label?: string
+  label?: string;
+  url?: string;
+  value?: number;
 }

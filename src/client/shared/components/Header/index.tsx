@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 
 import { ITabItem } from "../../models";
 import Navigation from "../Navigation";
+import { ROUTES } from "../../routes/consts";
 
 import "./index.scss";
 
@@ -11,7 +12,10 @@ interface IProps {
 }
 
 const Header: FC<IProps> = ({ title }) => {
-  const tabs: ITabItem[] = [{ label: "Characters" }, { label: "Episodes" }];
+  const tabs: ITabItem[] = [
+    { value: 0, label: "Characters", url: ROUTES.CHARACTERS.PATH },
+    { value: 1, label: "Episodes", url: ROUTES.EPISODES.PATH },
+  ];
 
   return (
     <Box
