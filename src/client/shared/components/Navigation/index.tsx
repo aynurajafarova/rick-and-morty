@@ -22,7 +22,6 @@ const Navigation: FC<IProps> = ({ tabs }) => {
     <Box
       sx={{
         maxWidth: 225,
-        margin: "0 auto",
       }}
       className="rick-and-morty__navigation"
     >

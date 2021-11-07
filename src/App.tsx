@@ -2,9 +2,7 @@ import { FC, lazy, Suspense } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { Container } from "@mui/material";
 
-import Navigation from "./client/shared/components/Navigation/index";
 import Header from "./client/shared/components/Header/index";
-import { ITabItem } from "./client/shared/models";
 import { ROUTES } from "./client/shared/routes/consts";
 
 const CharactersPage = lazy(
@@ -23,13 +21,10 @@ const AppRoutes: FC = () => (
 );
 
 const App: FC = () => {
-  const tabs: ITabItem[] = [{ label: "Characters" }, { label: "Episodes" }];
-
   return (
     <div className="app">
-      <Header title="Rick and Morty" />
-      <Navigation {...{ tabs }} />
       <Container maxWidth="lg">
+        <Header title="Rick and Morty" />
         <AppRoutes />
       </Container>
     </div>
