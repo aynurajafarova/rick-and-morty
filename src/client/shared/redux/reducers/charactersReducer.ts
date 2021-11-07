@@ -1,4 +1,4 @@
-import { ICharacters } from "../../../apps/Characters/models/characters";
+import { ICharacters } from "../../../apps/characters/models/character";
 import { types } from "../actions/types";
 import { IAction } from "../../models/action";
 

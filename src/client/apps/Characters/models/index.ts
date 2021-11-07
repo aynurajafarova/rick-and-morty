@@ -1,1 +1,1 @@
-import "./characters";
+import "./character";

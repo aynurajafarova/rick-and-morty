@@ -5,7 +5,7 @@ import {
   fetchCharactersRequest,
   fetchCharactersSuccess,
 } from "../../../shared/redux/actions/charactersAction";
-import { API_BASE_URL } from "./../../../shared/consts/index";
+import { API_BASE_URL } from "../../../shared/consts/index";
 
 interface IActions {
   type: string;
