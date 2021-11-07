@@ -19,7 +19,13 @@ const Navigation: FC<IProps> = ({ tabs }) => {
   };
 
   return (
-    <Box sx={{ maxWidth: 480, bgcolor: "background.paper" }}>
+    <Box
+      sx={{
+        maxWidth: 225,
+        bgcolor: "background.paper",
+        margin: "0 auto",
+      }}
+    >
       <Tabs
         value={value}
         onChange={handleChange}

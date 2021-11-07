@@ -1,0 +1,11 @@
+@import "../../assets/styles/variables";
+
+.rick-and-morty {
+  &__header {
+    color: var(--primary-yellow);
+    font-size: 3.5rem;
+    letter-spacing: 2px;
+    font-weight: bold;
+    margin: 40px 0px;
+  }
+}

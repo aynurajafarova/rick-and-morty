@@ -2,13 +2,19 @@
 
 body {
   font-family: $font;
-}
-
-.app {
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("../images/rick-and-morty.jpg");
+  //   background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),
+  //     url("../images/rick-and-morty.jpg");
+  background: var(--primary-mid-gray);
   width: 100%;
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
+  text-align: center;
+}
+
+:root {
+  --primary-yellow: #ffff57;
+  --primary-dark-gray: #1b1b1b;
+  --primary-mid-gray: #222222;
+  --primary-light-gray: #dddddd;
 }

@@ -1,6 +1,7 @@
 import { FC } from "react";
 
 import Navigation from "./client/shared/components/Navigation/index";
+import Header from "./client/shared/components/Header/index";
 import { ITabItem } from "./client/shared/models";
 
 const App: FC = () => {
@@ -8,6 +9,7 @@ const App: FC = () => {
 
   return (
     <div className="app">
+      <Header title="Rick and Morty" />
       <Navigation {...{ tabs }} />
     </div>
   );
