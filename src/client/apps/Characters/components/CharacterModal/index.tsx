@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction } from "react";
+import { FC } from "react";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -10,7 +10,7 @@ import "./index.scss";
 
 interface IProps {
   open: boolean;
-  setOpen: Dispatch<SetStateAction<boolean>>;
+  handleClose: () => void;
   singleCharacter: ICharacterItem;
 }
 
@@ -27,11 +27,9 @@ const style = {
   borderRadius: "10px",
 };
 
-const CharacterModal: FC<IProps> = ({ open, setOpen, singleCharacter }) => {
+const CharacterModal: FC<IProps> = ({ open, singleCharacter, handleClose }) => {
   const { name, gender, image, location, origin, species, status } =
     singleCharacter;
-
-  const handleClose = () => setOpen(false);
 
   return (
     <div>

@@ -12,10 +12,12 @@ import {
 } from "../../../shared/models/reducer";
 import Pagination from "../../../shared/components/Pagination/index";
 import CharacterModal from "../components/CharacterModal/index";
+import { resetSingleCharacter } from "../../../shared/redux/actions/charactersAction";
 
 interface IProps {
   fetchCharactersList(page: number): (dispatch: Dispatch<IAction>) => void;
   fetchSingleCharacter(id: number): (dispatch: Dispatch<IAction>) => void;
+  resetSingleCharacter(): (dispatch: Dispatch<IAction>) => void;
   characters: ICharacters;
   singleCharacter: ICharacterItem;
 }
@@ -23,14 +25,18 @@ interface IProps {
 const CharactersPage: FC<IProps> = ({
   fetchCharactersList,
   fetchSingleCharacter,
+  resetSingleCharacter,
   characters,
   singleCharacter,
 }) => {
   const [page, setPage] = useState<number>(1);
   const [open, setOpen] = useState<boolean>(false);
 
-  const handleOpen = () => {
-    setOpen(true);
+  const handleOpen = () => setOpen(true);
+
+  const handleClose = () => {
+    setOpen(false);
+    resetSingleCharacter();
   };
 
   useEffect(() => {
@@ -60,7 +66,7 @@ const CharactersPage: FC<IProps> = ({
       </Box>
       <Pagination count={characters?.info?.pages} {...{ page, setPage }} />
       {singleCharacter && (
-        <CharacterModal {...{ open, setOpen, singleCharacter }} />
+        <CharacterModal {...{ open, singleCharacter, handleClose }} />
       )}
     </>
   );
@@ -79,6 +85,8 @@ const mapDispatchToProps = (dispatch: any) => {
     fetchCharactersList: (page: number) => dispatch(fetchCharactersList(page)),
     fetchSingleCharacter: (characterID: number) =>
       dispatch(fetchSingleCharacter(characterID)),
+
+    resetSingleCharacter: () => dispatch(resetSingleCharacter()),
   };
 };
 

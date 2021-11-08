@@ -41,3 +41,9 @@ export const fetchSingleCharacterFailure = (error: string) => {
     payload: error,
   };
 };
+
+export const resetSingleCharacter = () => {
+  return {
+    type: types.RESET_SINGLE_CHARACTER,
+  };
+}

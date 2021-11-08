@@ -46,6 +46,11 @@ export default (state = initialState, { type, payload }: IAction) => {
         singleCharacter: {},
         error: payload,
       };
+    case types.RESET_SINGLE_CHARACTER:
+      return {
+        ...state,
+        singleCharacter: {},
+      }
     default:
       return state;
   }
