@@ -13,6 +13,7 @@ import {
 import Pagination from "../../../shared/components/Pagination/index";
 import CharacterModal from "../components/CharacterModal/index";
 import { resetSingleCharacter } from "../../../shared/redux/actions/charactersAction";
+import Loader from "../../../shared/components/Loader";
 
 interface IProps {
   fetchCharactersList(page: number): (dispatch: Dispatch<IAction>) => void;
@@ -20,6 +21,7 @@ interface IProps {
   resetSingleCharacter(): (dispatch: Dispatch<IAction>) => void;
   characters: ICharacters;
   singleCharacter: ICharacterItem;
+  loading?: boolean;
 }
 
 const CharactersPage: FC<IProps> = ({
@@ -28,6 +30,7 @@ const CharactersPage: FC<IProps> = ({
   resetSingleCharacter,
   characters,
   singleCharacter,
+  loading,
 }) => {
   const [page, setPage] = useState<number>(1);
   const [open, setOpen] = useState<boolean>(false);
@@ -45,28 +48,46 @@ const CharactersPage: FC<IProps> = ({
 
   return (
     <>
-      <Box sx={{ flexGrow: 1 }} className="rick-and-morty__characters">
-        <Grid container spacing={2}>
-          {characters?.results?.map(
-            ({ id, gender, image, name, species, status }: ICharacterItem) => {
-              return (
-                <Grid item xs={3} key={id}>
-                  <CharacterCard
-                    {...{ gender, image, name, species, status }}
-                    openModal={() => {
-                      handleOpen();
-                      fetchSingleCharacter(id as number);
-                    }}
-                  />
-                </Grid>
-              );
-            }
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <Box sx={{ flexGrow: 1 }} className="rick-and-morty__characters">
+            <Grid container spacing={2}>
+              {characters?.results?.map(
+                ({
+                  id,
+                  gender,
+                  image,
+                  name,
+                  species,
+                  status,
+                }: ICharacterItem) => {
+                  return (
+                    <Grid item xs={3} key={id}>
+                      <CharacterCard
+                        {...{ gender, image, name, species, status }}
+                        openModal={() => {
+                          handleOpen();
+                          fetchSingleCharacter(id as number);
+                        }}
+                      />
+                    </Grid>
+                  );
+                }
+              )}
+            </Grid>
+          </Box>
+          {characters?.info?.pages && (
+            <Pagination
+              count={characters?.info?.pages}
+              {...{ page, setPage }}
+            />
           )}
-        </Grid>
-      </Box>
-      <Pagination count={characters?.info?.pages} {...{ page, setPage }} />
-      {singleCharacter && (
-        <CharacterModal {...{ open, singleCharacter, handleClose }} />
+          {singleCharacter && (
+            <CharacterModal {...{ open, singleCharacter, handleClose }} />
+          )}
+        </>
       )}
     </>
   );
@@ -77,6 +98,7 @@ const mapStateToProps = (state: ICharactersData) => {
   return {
     characters: charactersData.characters,
     singleCharacter: charactersData.singleCharacter,
+    loading: charactersData.loading,
   };
 };
 
@@ -85,7 +107,6 @@ const mapDispatchToProps = (dispatch: any) => {
     fetchCharactersList: (page: number) => dispatch(fetchCharactersList(page)),
     fetchSingleCharacter: (characterID: number) =>
       dispatch(fetchSingleCharacter(characterID)),
-
     resetSingleCharacter: () => dispatch(resetSingleCharacter()),
   };
 };

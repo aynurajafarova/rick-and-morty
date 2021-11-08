@@ -9,6 +9,7 @@ import { Container } from "@mui/material";
 
 import Header from "./client/shared/components/Header/index";
 import { ROUTES } from "./client/shared/routes/consts";
+import Loader from "./client/shared/components/Loader";
 
 const CharactersPage = lazy(
   () => import("./client/apps/characters/view/CharactersPage")
@@ -20,7 +21,7 @@ const EpisodesPage = lazy(
 const AppRoutes: FC = () => (
   <Router>
     <Header title="Rick and Morty" />
-    <Suspense fallback={"...loading"}>
+    <Suspense fallback={<Loader/>}>
       <Switch>
         <Route exact path={ROUTES.CHARACTERS.PATH} component={CharactersPage} />
         <Route exact path={ROUTES.EPISODES.PATH} component={EpisodesPage} />

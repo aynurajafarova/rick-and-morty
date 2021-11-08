@@ -11,7 +11,7 @@ import Paper from "@mui/material/Paper";
 import { IEpisodeItem } from "../../models";
 
 interface IProps {
-  episodes: IEpisodeItem[];
+  episodes?: IEpisodeItem[];
 }
 
 interface ITableHeader {
@@ -48,35 +48,41 @@ const tableHeader: ITableHeader[] = [
 
 const EpisodesListTable: FC<IProps> = ({ episodes }) => {
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            {tableHeader?.map(({ name, key }: ITableHeader) => {
-              return <StyledTableCell key={key}>{name}</StyledTableCell>;
-            })}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {episodes?.map(({ id, name, episode, air_date }: IEpisodeItem) => (
-            <StyledTableRow key={id}>
-              <StyledTableCell component="th" scope="row">
-                {id}
-              </StyledTableCell>
-              <StyledTableCell component="th" scope="row">
-                {name}
-              </StyledTableCell>
-              <StyledTableCell component="th" scope="row">
-                {episode}
-              </StyledTableCell>
-              <StyledTableCell component="th" scope="row">
-                {air_date}
-              </StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <>
+      {episodes && (
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 700 }} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                {tableHeader?.map(({ name, key }: ITableHeader) => {
+                  return <StyledTableCell key={key}>{name}</StyledTableCell>;
+                })}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {episodes?.map(
+                ({ id, name, episode, air_date }: IEpisodeItem) => (
+                  <StyledTableRow key={id}>
+                    <StyledTableCell component="th" scope="row">
+                      {id}
+                    </StyledTableCell>
+                    <StyledTableCell component="th" scope="row">
+                      {name}
+                    </StyledTableCell>
+                    <StyledTableCell component="th" scope="row">
+                      {episode}
+                    </StyledTableCell>
+                    <StyledTableCell component="th" scope="row">
+                      {air_date}
+                    </StyledTableCell>
+                  </StyledTableRow>
+                )
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
+    </>
   );
 };
 
