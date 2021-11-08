@@ -1,9 +1,4 @@
-export interface ICharacterInfo {
-  count?: number;
-  next?: string;
-  pages?: number;
-  prev?: string;
-}
+import { IResponseInfo } from "../../../shared/models/index";
 
 export interface ICharacterItemOrigin {
   name?: string;
@@ -28,6 +23,6 @@ export interface ICharacterItem {
 }
 
 export interface ICharacters {
-  info?: ICharacterInfo;
+  info?: IResponseInfo;
   results?: ICharacterItem[];
 }

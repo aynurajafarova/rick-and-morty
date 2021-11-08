@@ -1,4 +1,4 @@
 export interface IAction {
-    type: string;
-    payload?: object | []
+  type?: string;
+  payload?: object | object[] | string;
 }

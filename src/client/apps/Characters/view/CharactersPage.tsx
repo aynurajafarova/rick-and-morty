@@ -1,12 +1,22 @@
-import { FC, useEffect } from "react";
+import { Dispatch, FC, useEffect } from "react";
 import { connect } from "react-redux";
 import { Box, Grid } from "@mui/material";
 
 import { fetchCharactersList } from "../api";
-import { ICharacterItem } from "../models/character";
+import { ICharacterItem, ICharacters } from "../models";
 import CharacterCard from "../components/CharacterCard";
+import { IAction } from "../../../shared/models";
+import {
+  ICharactersData,
+  ICharactersState,
+} from "../../../shared/models/reducer";
 
-const CharactersPage: FC = ({ fetchCharactersList, characters }: any) => {
+interface IProps {
+  fetchCharactersList(): (dispatch: Dispatch<IAction>) => void;
+  characters: ICharacters;
+}
+
+const CharactersPage: FC<IProps> = ({ fetchCharactersList, characters }) => {
   useEffect(() => {
     fetchCharactersList();
   }, []);
@@ -28,9 +38,10 @@ const CharactersPage: FC = ({ fetchCharactersList, characters }: any) => {
   );
 };
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: ICharactersData) => {
+  const charactersData: ICharactersState = state.charactersData;
   return {
-    characters: state.charactersData.characters,
+    characters: charactersData.characters,
   };
 };
 

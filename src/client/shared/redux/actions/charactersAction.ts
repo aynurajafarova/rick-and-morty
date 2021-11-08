@@ -1,4 +1,4 @@
-import { ICharacters } from "../../../apps/characters/models/character";
+import { ICharacters } from "../../../apps/characters/models/index";
 import { types } from "./types";
 
 export const fetchCharactersRequest = () => {

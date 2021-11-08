@@ -1,30 +1,30 @@
-import { types } from "../actions/types";
 import { IAction } from "../../models";
-import { ICharactersState } from "../../models/reducer";
+import { IEpisodesState } from "../../models/reducer";
+import { types } from "../actions/types";
 
-const initialState: ICharactersState = {
+const initialState: IEpisodesState = {
   loading: false,
-  characters: {},
+  episodes: {},
   error: "",
 };
 
 export default (state = initialState, { type, payload }: IAction) => {
   switch (type) {
-    case types.FETCH_CHARACTERS_REQUEST:
+    case types.FETCH_EPISODES_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case types.FETCH_CHARACTERS_SUCCESS:
+    case types.FETCH_EPISODES_SUCCESS:
       return {
-        characters: payload,
+        episodes: payload,
         loading: false,
         error: "",
       };
-    case types.FETCH_CHARACTERS_FAILURE:
+    case types.FETCH_EPISODES_FAILURE:
       return {
         loading: false,
-        characters: {},
+        episodes: {},
         error: payload,
       };
     default:

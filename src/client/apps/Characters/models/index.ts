@@ -1,1 +1,1 @@
-import "./character";
+export * from "./character";
