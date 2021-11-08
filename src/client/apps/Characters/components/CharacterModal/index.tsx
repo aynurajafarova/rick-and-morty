@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction, useState } from "react";
+import { Dispatch, FC, SetStateAction } from "react";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -8,7 +8,6 @@ import Typography from "@mui/material/Typography";
 interface IProps {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
-  characterID?: number;
 }
 
 const style = {
@@ -23,9 +22,8 @@ const style = {
   p: 4,
 };
 
-const TransitionsModal: FC<IProps> = ({ open, setOpen, characterID }) => {
+const CharacterModal: FC<IProps> = ({ open, setOpen }) => {
   const handleClose = () => setOpen(false);
-  console.log(characterID);
   return (
     <div>
       <Modal
@@ -54,4 +52,4 @@ const TransitionsModal: FC<IProps> = ({ open, setOpen, characterID }) => {
   );
 };
 
-export default TransitionsModal;
+export default CharacterModal;

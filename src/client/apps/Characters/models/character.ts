@@ -5,7 +5,7 @@ export interface ICharacterItemOrigin {
   url?: string;
 }
 
-export interface ICharacterItemLocation extends ICharacterItemOrigin {}
+export interface ICharacterItemLocation extends ICharacterItemOrigin { }
 
 export interface ICharacterItem {
   created?: string;
@@ -26,3 +26,4 @@ export interface ICharacters {
   info?: IResponseInfo;
   results?: ICharacterItem[];
 }
+

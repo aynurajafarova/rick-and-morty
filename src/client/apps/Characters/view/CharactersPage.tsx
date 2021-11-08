@@ -2,7 +2,7 @@ import { Dispatch, FC, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Box, Grid } from "@mui/material";
 
-import { fetchCharactersList } from "../api";
+import { fetchCharactersList, fetchSingleCharacter } from "../api";
 import { ICharacterItem, ICharacters } from "../models";
 import CharacterCard from "../components/CharacterCard";
 import { IAction } from "../../../shared/models";
@@ -11,23 +11,33 @@ import {
   ICharactersState,
 } from "../../../shared/models/reducer";
 import Pagination from "../../../shared/components/Pagination/index";
-import Modal from "../../../shared/components/Modal/index";
+import CharacterModal from "../components/CharacterModal/index";
 
 interface IProps {
   fetchCharactersList(page: number): (dispatch: Dispatch<IAction>) => void;
+  fetchSingleCharacter(id: number): (dispatch: Dispatch<IAction>) => void;
   characters: ICharacters;
+  singleCharacter: ICharacterItem;
 }
 
-const CharactersPage: FC<IProps> = ({ fetchCharactersList, characters }) => {
+const CharactersPage: FC<IProps> = ({
+  fetchCharactersList,
+  fetchSingleCharacter,
+  characters,
+  singleCharacter,
+}) => {
   const [page, setPage] = useState<number>(1);
   const [open, setOpen] = useState<boolean>(false);
-  const [characterID, setCharacterID] = useState<number>();
 
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
   useEffect(() => {
     fetchCharactersList(page);
   }, [page]);
+
+  console.log("singleCharacter", singleCharacter);
 
   return (
     <>
@@ -41,7 +51,7 @@ const CharactersPage: FC<IProps> = ({ fetchCharactersList, characters }) => {
                     {...{ gender, image, name, species, status }}
                     openModal={() => {
                       handleOpen();
-                      setCharacterID(id && id);
+                      fetchSingleCharacter(id as number);
                     }}
                   />
                 </Grid>
@@ -51,7 +61,7 @@ const CharactersPage: FC<IProps> = ({ fetchCharactersList, characters }) => {
         </Grid>
       </Box>
       <Pagination count={characters?.info?.pages} {...{ page, setPage }} />
-      <Modal {...{ open, setOpen, characterID }} />
+      <CharacterModal {...{ open, setOpen }} />
     </>
   );
 };
@@ -60,12 +70,15 @@ const mapStateToProps = (state: ICharactersData) => {
   const charactersData: ICharactersState = state.charactersData;
   return {
     characters: charactersData.characters,
+    singleCharacter: charactersData.singleCharacter,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     fetchCharactersList: (page: number) => dispatch(fetchCharactersList(page)),
+    fetchSingleCharacter: (characterID: number) =>
+      dispatch(fetchSingleCharacter(characterID)),
   };
 };
 

@@ -6,6 +6,7 @@ const initialState: ICharactersState = {
   loading: false,
   characters: {},
   error: "",
+  singleCharacter: {},
 };
 
 export default (state = initialState, { type, payload }: IAction) => {
@@ -25,6 +26,24 @@ export default (state = initialState, { type, payload }: IAction) => {
       return {
         loading: false,
         characters: {},
+        error: payload,
+      };
+    case types.FETCH_SINGLE_CHARACTER_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.FETCH_SINGLE_CHARACTER_SUCCESS:
+      return {
+        ...state,
+        singleCharacter: payload,
+        loading: false,
+        error: "",
+      };
+    case types.FETCH_SINGLE_CHARACTER_FAILURE:
+      return {
+        loading: false,
+        singleCharacter: {},
         error: payload,
       };
     default:

@@ -1,4 +1,4 @@
-import { ICharacters } from "../../apps/characters/models";
+import { ICharacters, ICharacterItem } from "../../apps/characters/models";
 import { IEpisodes } from "../../apps/episodes/models";
 
 export interface IInitialState {
@@ -8,6 +8,7 @@ export interface IInitialState {
 
 export interface ICharactersState extends IInitialState {
   characters: ICharacters;
+  singleCharacter: ICharacterItem;
 }
 
 export interface IEpisodesState extends IInitialState {
