@@ -11,6 +11,7 @@ import {
   ICharactersState,
 } from "../../../shared/models/reducer";
 import Pagination from "../../../shared/components/Pagination/index";
+import Modal from "../../../shared/components/Modal/index";
 
 interface IProps {
   fetchCharactersList(page: number): (dispatch: Dispatch<IAction>) => void;
@@ -19,6 +20,10 @@ interface IProps {
 
 const CharactersPage: FC<IProps> = ({ fetchCharactersList, characters }) => {
   const [page, setPage] = useState<number>(1);
+  const [open, setOpen] = useState<boolean>(false);
+  const [characterID, setCharacterID] = useState<number>();
+
+  const handleOpen = () => setOpen(true);
 
   useEffect(() => {
     fetchCharactersList(page);
@@ -34,6 +39,10 @@ const CharactersPage: FC<IProps> = ({ fetchCharactersList, characters }) => {
                 <Grid item xs={3} key={id}>
                   <CharacterCard
                     {...{ gender, image, name, species, status }}
+                    openModal={() => {
+                      handleOpen();
+                      setCharacterID(id && id);
+                    }}
                   />
                 </Grid>
               );
@@ -42,6 +51,7 @@ const CharactersPage: FC<IProps> = ({ fetchCharactersList, characters }) => {
         </Grid>
       </Box>
       <Pagination count={characters?.info?.pages} {...{ page, setPage }} />
+      <Modal {...{ open, setOpen, characterID }} />
     </>
   );
 };

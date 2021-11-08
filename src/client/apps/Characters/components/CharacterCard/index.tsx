@@ -8,6 +8,7 @@ interface IProps {
   name?: string;
   species?: string;
   status?: string;
+  openModal: () => void;
 }
 
 const CharacterCard: FC<IProps> = ({
@@ -16,9 +17,10 @@ const CharacterCard: FC<IProps> = ({
   name,
   species,
   status,
+  openModal,
 }) => {
   return (
-    <div className="rick-and-morty__character_card">
+    <div className="rick-and-morty__character_card" onClick={openModal}>
       <div className="rick-and-morty__character_card_name center">
         <h3>{name}</h3>
       </div>
