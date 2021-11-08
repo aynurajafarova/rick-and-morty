@@ -8,10 +8,10 @@ import {
 import { API_BASE_URL } from "../../../shared/consts/index";
 import { IAction } from "../../../shared/models";
 
-export const fetchCharactersList = () => {
+export const fetchCharactersList = (page: number) => {
   return (dispatch: Dispatch<IAction>) => {
     dispatch(fetchCharactersRequest());
-    fetch(`${API_BASE_URL}/character`)
+    fetch(`${API_BASE_URL}/character?page=${page}`)
       .then((response) => response.json())
       .then((responseJSON) => {
         const charactersData = responseJSON;

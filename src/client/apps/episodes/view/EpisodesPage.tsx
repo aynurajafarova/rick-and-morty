@@ -6,7 +6,7 @@ import { IEpisodesData, IEpisodesState } from "../../../shared/models/reducer";
 import { fetchEpisodesList } from "../api";
 import { IEpisodes } from "../models";
 import EpisodesListTable from "../components/EpisodesListTable/index";
-import BasicPagination from "../../../shared/components/Pagination/index";
+import Pagination from "../../../shared/components/Pagination/index";
 
 interface IProps {
   fetchEpisodesList(page: number): (dispatch: Dispatch<IAction>) => void;
@@ -23,7 +23,7 @@ const EpisodesPage: FC<IProps> = ({ fetchEpisodesList, episodes }) => {
   return (
     <>
       <EpisodesListTable episodes={episodes?.results!} />
-      <BasicPagination count={episodes?.info?.pages} {...{ page, setPage }} />
+      <Pagination count={episodes?.info?.pages} {...{ page, setPage }} />
     </>
   );
 };

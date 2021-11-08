@@ -19,7 +19,7 @@ const BasicPagination: FC<IProps> = ({ count, page, setPage }) => {
     <Stack
       spacing={2}
       marginTop={6}
-      marginBottom={6}
+      marginBottom={8}
       className="rick-and-morty__pagination center"
     >
       <Pagination {...{ count, page }} onChange={handleChange} />
