@@ -1,0 +1,33 @@
+@import "./../../../../shared/assets/styles/variables";
+
+.rick-and-morty {
+  &__modal {
+    &__content {
+      &:focus-visible {
+        outline: none;
+      }
+      &__img {
+        width: 200px;
+        box-shadow: var(--primary-dark-gray) 0px 1px 4px;
+        img {
+          width: 100%;
+        }
+      }
+      &__details {
+        width: 300px;
+        padding: 20px;
+        text-align: left;
+        margin-left: 15px;
+        p {
+          font-weight: 500;
+          color: var(--primary-dark-gray);
+          line-height: 20px;
+          span {
+            color: var(--primary-mid-gray);
+            font-weight: 300;
+          }
+        }
+      }
+    }
+  }
+}

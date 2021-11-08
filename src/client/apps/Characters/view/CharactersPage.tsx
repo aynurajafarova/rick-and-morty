@@ -37,8 +37,6 @@ const CharactersPage: FC<IProps> = ({
     fetchCharactersList(page);
   }, [page]);
 
-  console.log("singleCharacter", singleCharacter);
-
   return (
     <>
       <Box sx={{ flexGrow: 1 }} className="rick-and-morty__characters">
@@ -61,7 +59,9 @@ const CharactersPage: FC<IProps> = ({
         </Grid>
       </Box>
       <Pagination count={characters?.info?.pages} {...{ page, setPage }} />
-      <CharacterModal {...{ open, setOpen }} />
+      {singleCharacter && (
+        <CharacterModal {...{ open, setOpen, singleCharacter }} />
+      )}
     </>
   );
 };
