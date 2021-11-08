@@ -1,4 +1,4 @@
-import * as React from "react";
+import { FC } from "react";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -7,16 +7,22 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+
 import { IEpisodeItem } from "../../models";
 
 interface IProps {
   episodes: IEpisodeItem[];
 }
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
+interface ITableHeader {
+  key: number;
+  name: string;
+}
+
+const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
+    backgroundColor: "#1b1b1b",
+    color: "#dddddd",
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
@@ -33,28 +39,20 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const rows = [
-  { name: "Frozen yoghurt" },
-  { name: "Frozen yoghurt" },
-  { name: "Frozen yoghurt" },
-  { name: "Frozen yoghurt" },
-  { name: "Frozen yoghurt" },
-];
-
-const tableHeader = [
+const tableHeader: ITableHeader[] = [
   { key: 1, name: "Id" },
   { key: 2, name: "Name" },
   { key: 3, name: "Episode" },
   { key: 4, name: "Air Date" },
 ];
 
-const EpisodesListTable: React.FC<IProps> = ({ episodes }) => {
+const EpisodesListTable: FC<IProps> = ({ episodes }) => {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            {tableHeader?.map(({ name, key }: any) => {
+            {tableHeader?.map(({ name, key }: ITableHeader) => {
               return <StyledTableCell key={key}>{name}</StyledTableCell>;
             })}
           </TableRow>
@@ -81,4 +79,5 @@ const EpisodesListTable: React.FC<IProps> = ({ episodes }) => {
     </TableContainer>
   );
 };
+
 export default EpisodesListTable;
