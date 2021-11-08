@@ -8,10 +8,10 @@ import {
   fetchEpisodesSuccess,
 } from "../../../shared/redux/actions/episodesAction";
 
-export const fetchEpisodesList = () => {
+export const fetchEpisodesList = (page: number) => {
   return (dispatch: Dispatch<IAction>) => {
     dispatch(fetchEpisodesRequest());
-    fetch(`${API_BASE_URL}/episode`)
+    fetch(`${API_BASE_URL}/episode?page=${page}`)
       .then((response) => response.json())
       .then((responseJSON) => {
         const episodesData = responseJSON;

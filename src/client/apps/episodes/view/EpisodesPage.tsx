@@ -1,4 +1,4 @@
-import { Dispatch, FC, useEffect } from "react";
+import { Dispatch, FC, useEffect, useState } from "react";
 import { connect } from "react-redux";
 
 import { IAction } from "../../../shared/models";
@@ -6,18 +6,26 @@ import { IEpisodesData, IEpisodesState } from "../../../shared/models/reducer";
 import { fetchEpisodesList } from "../api";
 import { IEpisodes } from "../models";
 import EpisodesListTable from "../components/EpisodesListTable/index";
+import BasicPagination from "../../../shared/components/Pagination/index";
 
 interface IProps {
-  fetchEpisodesList(): (dispatch: Dispatch<IAction>) => void;
+  fetchEpisodesList(page: number): (dispatch: Dispatch<IAction>) => void;
   episodes: IEpisodes;
 }
 
 const EpisodesPage: FC<IProps> = ({ fetchEpisodesList, episodes }) => {
-  useEffect(() => {
-    fetchEpisodesList();
-  }, []);
+  const [page, setPage] = useState<number>(1);
 
-  return <EpisodesListTable episodes={episodes?.results!} />;
+  useEffect(() => {
+    fetchEpisodesList(page);
+  }, [page]);
+
+  return (
+    <>
+      <EpisodesListTable episodes={episodes?.results!} />
+      <BasicPagination count={episodes?.info?.pages} {...{ page, setPage }} />
+    </>
+  );
 };
 
 const mapStateToProps = (state: IEpisodesData) => {
@@ -29,7 +37,7 @@ const mapStateToProps = (state: IEpisodesData) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    fetchEpisodesList: () => dispatch(fetchEpisodesList()),
+    fetchEpisodesList: (page: number) => dispatch(fetchEpisodesList(page)),
   };
 };
 

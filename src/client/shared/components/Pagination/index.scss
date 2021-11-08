@@ -1,0 +1,22 @@
+@import "../../assets/styles/variables";
+
+.rick-and-morty {
+  &__pagination {
+    nav {
+      ul {
+        li {
+          button {
+            color: var(--primary-light-gray);
+          }
+          .Mui-selected {
+            background-color: var(--primary-yellow);
+            color: var(--primary-dark-gray);
+            &:hover {
+              background-color: var(--primary-yellow);
+            }
+          }
+        }
+      }
+    }
+  }
+}
