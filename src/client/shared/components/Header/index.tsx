@@ -19,7 +19,7 @@ const Header: FC<IProps> = ({ title }) => {
 
   return (
     <Box
-      sx={{ display: "flex", justifyContent: "space-between", paddingTop: 4 }}
+      sx={{ display: "flex", justifyContent: "space-between", paddingTop: 4, marginBottom:9 }}
     >
       <div className="rick-and-morty__header">
         <h1>{title}</h1>

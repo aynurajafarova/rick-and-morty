@@ -5,6 +5,7 @@ import { IAction } from "../../../shared/models";
 import { IEpisodesData, IEpisodesState } from "../../../shared/models/reducer";
 import { fetchEpisodesList } from "../api";
 import { IEpisodes } from "../models";
+import EpisodesListTable from "../components/EpisodesListTable/index";
 
 interface IProps {
   fetchEpisodesList(): (dispatch: Dispatch<IAction>) => void;
@@ -12,12 +13,11 @@ interface IProps {
 }
 
 const EpisodesPage: FC<IProps> = ({ fetchEpisodesList, episodes }) => {
-  console.log("episodes", episodes);
   useEffect(() => {
     fetchEpisodesList();
   }, []);
 
-  return <div style={{ color: "white" }}>EpisodesPage</div>;
+  return <EpisodesListTable episodes={episodes?.results!} />;
 };
 
 const mapStateToProps = (state: IEpisodesData) => {
