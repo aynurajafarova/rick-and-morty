@@ -1,4 +1,4 @@
-import { Dispatch, FC, useEffect, useState } from "react";
+import { ChangeEvent, Dispatch, FC, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Box, Grid } from "@mui/material";
 
@@ -37,7 +37,6 @@ const CharactersPage: FC<IProps> = ({
   loading,
 }) => {
   const [open, setOpen] = useState<boolean>(false);
-
   const [params, setParams] = useState<ICharactersListAPI>({
     name: "",
     page: 1,
@@ -66,9 +65,35 @@ const CharactersPage: FC<IProps> = ({
     resetSingleCharacter();
   };
 
+  const handleChangeGender = (
+    event: ChangeEvent<HTMLInputElement>,
+    value: ISelectOption
+  ) => {
+    setParams((prevState: ICharactersListAPI) => {
+      return {
+        ...prevState,
+        gender: value?.key,
+      };
+    });
+  };
+
+  const handleChangeStatus = (
+    event: ChangeEvent<HTMLInputElement>,
+    value: ISelectOption
+  ) => {
+    setParams((prevState: ICharactersListAPI) => {
+      return {
+        ...prevState,
+        status: value?.key,
+      };
+    });
+  };
+
   useEffect(() => {
     fetchCharactersList(params);
   }, [params]);
+
+  console.log("parans", params);
 
   return (
     <>
@@ -79,8 +104,16 @@ const CharactersPage: FC<IProps> = ({
           <Box sx={{ display: "flex", marginTop: 3, marginBottom: 6 }}>
             <Input label="Name" />
             <Input label="Species" />
-            <Select options={statusOptions} label="Status" />
-            <Select options={genderOptions} label="Gender" />
+            <Select
+              options={statusOptions}
+              label="Status"
+              onChange={handleChangeStatus}
+            />
+            <Select
+              options={genderOptions}
+              label="Gender"
+              onChange={handleChangeGender}
+            />
           </Box>
           <Box sx={{ flexGrow: 1 }} className="rick-and-morty__characters">
             <Grid container spacing={2}>

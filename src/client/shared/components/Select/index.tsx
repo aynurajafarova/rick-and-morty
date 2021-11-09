@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 
@@ -9,21 +9,18 @@ import "./index.scss";
 interface IProps {
   options: ISelectOption[];
   label: string;
+  onChange: any;
 }
 
-const Select: FC<IProps> = ({ options, label }) => {
-  const [value, setValue] = useState();
+const Select: FC<IProps> = ({ options, label, onChange }) => {
   return (
     <Autocomplete
       className="rick-and-morty__select"
       disablePortal
       id="combo-box-demo"
-      {...{ options }}
+      {...{ options, onChange }}
       sx={{ width: 300 }}
       renderInput={(params) => <TextField {...params} {...{ label }} />}
-      onChange={(event: any, value: any) => {
-        console.log(value);
-      }}
     />
   );
 };
