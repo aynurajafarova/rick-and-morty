@@ -1,17 +1,47 @@
 @import "./reset", "./font", "./variables", "./helper";
 
+%common-border-style {
+  border: 1px solid var(--primary-light-gray) !important;
+}
+
+%common-text-color {
+  color: var(--primary-light-gray) !important;
+}
+
 body {
   font-family: $font;
-  // background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),
-  //   url("../images/rick-and-morty.jpg");
   background: var(--primary-mid-gray);
   width: 100%;
   height: 100%;
-  // height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
   text-align: center;
   letter-spacing: 1px;
+}
+
+fieldset {
+  &:focus-visible {
+    outline: none;
+  }
+}
+.MuiOutlinedInput-notchedOutline {
+  @extend %common-border-style;
+}
+label {
+  @extend %common-text-color;
+}
+.css-1kty9di-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
+  color: var(--primary-light-gray);
+}
+.css-154xyx0-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
+  @extend %common-border-style;
+}
+svg {
+  fill: var(--primary-light-gray) !important;
+}
+input {
+  @extend %common-text-color;
 }
 
 :root {

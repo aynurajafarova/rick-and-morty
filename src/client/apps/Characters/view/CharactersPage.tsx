@@ -15,6 +15,7 @@ import CharacterModal from "../components/CharacterModal/index";
 import { resetSingleCharacter } from "../../../shared/redux/actions/charactersAction";
 import Loader from "../../../shared/components/Loader";
 import Select from "../../../shared/components/Select";
+import Input from "../../../shared/components/Input";
 
 interface IProps {
   fetchCharactersList(
@@ -76,6 +77,7 @@ const CharactersPage: FC<IProps> = ({
       ) : (
         <>
           <Box sx={{ display: "flex", marginTop: 3, marginBottom: 6 }}>
+            <Input />
             <Select options={statusOptions} label="Status" />
             <Select options={genderOptions} label="Gender" />
           </Box>
