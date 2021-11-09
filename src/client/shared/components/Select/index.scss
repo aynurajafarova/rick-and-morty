@@ -4,5 +4,11 @@
   &__select {
     width: 200px;
     margin: 0 10px;
+    .MuiOutlinedInput-root {
+      padding: 3px !important;
+    }
+    label {
+      top: -6px;
+    }
   }
 }
