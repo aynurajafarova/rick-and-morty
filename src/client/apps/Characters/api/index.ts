@@ -25,13 +25,15 @@ export const fetchCharactersList = ({
       `${API_BASE_URL}/character?page=${page}&name=${name}&status=${status}&species=${species}&gender=${gender}`
     )
       .then((response) => response.json())
-      .then((responseJSON) => {
-        const charactersData = responseJSON;
-        dispatch(fetchCharactersSuccess(charactersData));
+      .then((response) => {
+        if (response.error) {
+          throw (response.error)
+        }
+        dispatch(fetchCharactersSuccess(response));
+        return response;
       })
       .catch((error) => {
-        const errMsg = error.message;
-        dispatch(fetchCharactersFailure(errMsg));
+        dispatch(fetchCharactersFailure(error));
       });
   };
 };
@@ -41,13 +43,15 @@ export const fetchSingleCharacter = (id: number) => {
     dispatch(fetchSingleCharacterRequest());
     fetch(`${API_BASE_URL}/character/${id}`)
       .then((response) => response.json())
-      .then((responseJSON) => {
-        const characterData = responseJSON;
-        dispatch(fetchSingleCharacterSuccess(characterData));
+      .then((response) => {
+        if (response.error) {
+          throw (response.error)
+        }
+        dispatch(fetchSingleCharacterSuccess(response));
+        return response;
       })
       .catch((error) => {
-        const errMsg = error.message;
-        dispatch(fetchSingleCharacterFailure(errMsg));
+        dispatch(fetchSingleCharacterFailure(error));
       });
   };
 };
