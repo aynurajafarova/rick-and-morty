@@ -2,17 +2,26 @@ import { ChangeEvent, Dispatch, FC, SetStateAction } from "react";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
+import { ICharactersListAPI } from "../../../apps/characters/models";
+
 import "./index.scss";
 
 interface IProps {
   count?: number;
-  page: number;
-  setPage: Dispatch<SetStateAction<number>>;
+  params: ICharactersListAPI;
+  setParams: Dispatch<SetStateAction<ICharactersListAPI>>;
 }
 
-const BasicPagination: FC<IProps> = ({ count, page, setPage }) => {
+const BasicPagination: FC<IProps> = ({ count, params, setParams }) => {
+  const { page } = params;
+
   const handleChange = (event: ChangeEvent<unknown>, value: number) => {
-    setPage(value);
+    setParams((prevState: ICharactersListAPI) => {
+      return {
+        ...prevState,
+        page: value,
+      };
+    });
   };
 
   return (

@@ -5,7 +5,7 @@ export interface ICharacterItemOrigin {
   url?: string;
 }
 
-export interface ICharacterItemLocation extends ICharacterItemOrigin { }
+export interface ICharacterItemLocation extends ICharacterItemOrigin {}
 
 export interface ICharacterItem {
   created?: string;
@@ -27,3 +27,10 @@ export interface ICharacters {
   results?: ICharacterItem[];
 }
 
+export interface ICharactersListAPI {
+  page?: number;
+  name?: string;
+  status?: string;
+  species?: string;
+  gender?: string;
+}

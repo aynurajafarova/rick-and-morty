@@ -29,9 +29,9 @@ const EpisodesPage: FC<IProps> = ({ fetchEpisodesList, episodes, loading }) => {
       ) : (
         <>
           <EpisodesListTable episodes={episodes?.results} />
-          {episodes?.info?.pages && (
+          {/* {episodes?.info?.pages && (
             <Pagination count={episodes?.info?.pages} {...{ page, setPage }} />
-          )}
+          )} */}
         </>
       )}
     </>

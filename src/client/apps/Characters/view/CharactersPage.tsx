@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Box, Grid } from "@mui/material";
 
 import { fetchCharactersList, fetchSingleCharacter } from "../api";
-import { ICharacterItem, ICharacters } from "../models";
+import { ICharacterItem, ICharacters, ICharactersListAPI } from "../models";
 import CharacterCard from "../components/CharacterCard";
 import { IAction } from "../../../shared/models";
 import {
@@ -16,7 +16,9 @@ import { resetSingleCharacter } from "../../../shared/redux/actions/charactersAc
 import Loader from "../../../shared/components/Loader";
 
 interface IProps {
-  fetchCharactersList(page: number): (dispatch: Dispatch<IAction>) => void;
+  fetchCharactersList(
+    params: ICharactersListAPI
+  ): (dispatch: Dispatch<IAction>) => void;
   fetchSingleCharacter(id: number): (dispatch: Dispatch<IAction>) => void;
   resetSingleCharacter(): (dispatch: Dispatch<IAction>) => void;
   characters: ICharacters;
@@ -32,8 +34,15 @@ const CharactersPage: FC<IProps> = ({
   singleCharacter,
   loading,
 }) => {
-  const [page, setPage] = useState<number>(1);
   const [open, setOpen] = useState<boolean>(false);
+
+  const [params, setParams] = useState<ICharactersListAPI>({
+    name: "",
+    page: 1,
+    status: "",
+    species: "",
+    gender: "",
+  });
 
   const handleOpen = () => setOpen(true);
 
@@ -43,8 +52,8 @@ const CharactersPage: FC<IProps> = ({
   };
 
   useEffect(() => {
-    fetchCharactersList(page);
-  }, [page]);
+    fetchCharactersList(params);
+  }, [params]);
 
   return (
     <>
@@ -81,7 +90,7 @@ const CharactersPage: FC<IProps> = ({
           {characters?.info?.pages && (
             <Pagination
               count={characters?.info?.pages}
-              {...{ page, setPage }}
+              {...{ params, setParams }}
             />
           )}
           {singleCharacter && (
@@ -104,7 +113,8 @@ const mapStateToProps = (state: ICharactersData) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    fetchCharactersList: (page: number) => dispatch(fetchCharactersList(page)),
+    fetchCharactersList: (params: ICharactersListAPI) =>
+      dispatch(fetchCharactersList(params)),
     fetchSingleCharacter: (characterID: number) =>
       dispatch(fetchSingleCharacter(characterID)),
     resetSingleCharacter: () => dispatch(resetSingleCharacter()),
