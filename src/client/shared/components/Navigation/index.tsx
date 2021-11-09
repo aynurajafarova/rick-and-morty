@@ -21,7 +21,7 @@ const Navigation: FC<IProps> = ({ tabs }) => {
     tabs?.map(({ url, value }: ITabItem) => {
       if (history.location.pathname === url) setValue(value as number);
     });
-  }, []);
+  }, [history.location.pathname]);
 
   const handleChange = (event: any, newValue: number) => {
     setValue(newValue);

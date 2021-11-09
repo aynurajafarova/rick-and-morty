@@ -9,7 +9,7 @@ const initialState: ICharactersState = {
   singleCharacter: {},
 };
 
-export default (state = initialState, { type, payload }: IAction) => {
+const charactersReducer = (state = initialState, { type, payload }: IAction) => {
   switch (type) {
     case types.FETCH_CHARACTERS_REQUEST:
       return {
@@ -55,3 +55,5 @@ export default (state = initialState, { type, payload }: IAction) => {
       return state;
   }
 };
+
+export default charactersReducer;

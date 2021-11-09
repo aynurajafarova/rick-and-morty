@@ -8,7 +8,7 @@ const initialState: IEpisodesState = {
   error: "",
 };
 
-export default (state = initialState, { type, payload }: IAction) => {
+const episodesReducer = (state = initialState, { type, payload }: IAction) => {
   switch (type) {
     case types.FETCH_EPISODES_REQUEST:
       return {
@@ -31,3 +31,5 @@ export default (state = initialState, { type, payload }: IAction) => {
       return state;
   }
 };
+
+export default episodesReducer;

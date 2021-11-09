@@ -25,7 +25,7 @@ const CharacterCard: FC<IProps> = ({
         <h3>{name}</h3>
       </div>
       <div className="rick-and-morty__character_card_image img">
-        <img src={image} alt={`${name}-image`} />
+        <img src={image} alt={`${name}`} />
       </div>
       <div className="rick-and-morty__character_card_info">
         <p>

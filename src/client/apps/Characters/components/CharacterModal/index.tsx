@@ -48,7 +48,7 @@ const CharacterModal: FC<IProps> = ({ open, singleCharacter, handleClose }) => {
         <Fade in={open}>
           <Box sx={style} className="rick-and-morty__modal__content">
             <div className="rick-and-morty__modal__content__img img">
-              <img src={image} alt={`${name}-image`} />
+              <img src={image} alt={`${name}`} />
             </div>
             <div className="rick-and-morty__modal__content__details">
               <p>
