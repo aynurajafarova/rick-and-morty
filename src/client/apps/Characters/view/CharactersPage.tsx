@@ -1,10 +1,9 @@
 import { ChangeEvent, Dispatch, FC, useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { Box, Grid } from "@mui/material";
+import { Box } from "@mui/material";
 
 import { fetchCharactersList, fetchSingleCharacter } from "../api";
 import { ICharacterItem, ICharacters, ICharactersListAPI } from "../models";
-import CharacterCard from "../components/CharacterCard";
 import { IAction, ISelectOption } from "../../../shared/models";
 import {
   ICharactersData,
@@ -17,6 +16,7 @@ import Loader from "../../../shared/components/Loader";
 import Select from "../../../shared/components/Select";
 import Input from "../../../shared/components/Input";
 import ErrorCard from "../../../shared/components/ErrorCard";
+import Characters from "../components/Characters";
 
 interface IProps {
   fetchCharactersList(
@@ -136,32 +136,7 @@ const CharactersPage: FC<IProps> = ({
         <ErrorCard />
       ) : (
         <>
-          <Box sx={{ flexGrow: 1 }} className="rick-and-morty__characters">
-            <Grid container spacing={2}>
-              {characters?.results?.map(
-                ({
-                  id,
-                  gender,
-                  image,
-                  name,
-                  species,
-                  status,
-                }: ICharacterItem) => {
-                  return (
-                    <Grid item xs={3} key={id}>
-                      <CharacterCard
-                        {...{ gender, image, name, species, status }}
-                        openModal={() => {
-                          handleOpen();
-                          fetchSingleCharacter(id as number);
-                        }}
-                      />
-                    </Grid>
-                  );
-                }
-              )}
-            </Grid>
-          </Box>
+          <Characters {...{ characters, handleOpen, fetchSingleCharacter }} />
           {characters?.info?.pages && (
             <Pagination
               count={characters?.info?.pages}
