@@ -16,6 +16,7 @@ import { resetSingleCharacter } from "../../../shared/redux/actions/charactersAc
 import Loader from "../../../shared/components/Loader";
 import Select from "../../../shared/components/Select";
 import Input from "../../../shared/components/Input";
+import ErrorCard from "../../../shared/components/ErrorCard";
 
 interface IProps {
   fetchCharactersList(
@@ -26,6 +27,7 @@ interface IProps {
   characters: ICharacters;
   singleCharacter: ICharacterItem;
   loading?: boolean;
+  error?: string;
 }
 
 const CharactersPage: FC<IProps> = ({
@@ -35,6 +37,7 @@ const CharactersPage: FC<IProps> = ({
   characters,
   singleCharacter,
   loading,
+  error,
 }) => {
   const [open, setOpen] = useState<boolean>(false);
   const [params, setParams] = useState<ICharactersListAPI>({
@@ -111,8 +114,6 @@ const CharactersPage: FC<IProps> = ({
     fetchCharactersList(params);
   }, [params]);
 
-  console.log("parans", params);
-
   return (
     <>
       <Box sx={{ display: "flex", marginTop: 3, marginBottom: 6 }}>
@@ -131,6 +132,8 @@ const CharactersPage: FC<IProps> = ({
       </Box>
       {loading ? (
         <Loader />
+      ) : error ? (
+        <ErrorCard />
       ) : (
         <>
           <Box sx={{ flexGrow: 1 }} className="rick-and-morty__characters">
@@ -180,6 +183,7 @@ const mapStateToProps = (state: ICharactersData) => {
     characters: charactersData.characters,
     singleCharacter: charactersData.singleCharacter,
     loading: charactersData.loading,
+    error: charactersData.error,
   };
 };
 
