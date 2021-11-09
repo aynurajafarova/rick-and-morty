@@ -14,13 +14,15 @@ export const fetchEpisodesList = ({ page, name }: IEpisodesListAPI) => {
     dispatch(fetchEpisodesRequest());
     fetch(`${API_BASE_URL}/episode?page=${page}&name=${name}`)
       .then((response) => response.json())
-      .then((responseJSON) => {
-        const episodesData = responseJSON;
-        dispatch(fetchEpisodesSuccess(episodesData));
+      .then((response) => {
+        if (response.error) {
+          throw (response.error)
+        }
+        dispatch(fetchEpisodesSuccess(response));
+        return response;
       })
       .catch((error) => {
-        const errMsg = error.message;
-        dispatch(fetchEpisodesFailure(errMsg));
+        dispatch(fetchEpisodesFailure(error));
       });
   };
 };
