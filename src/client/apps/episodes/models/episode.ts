@@ -14,3 +14,8 @@ export interface IEpisodes {
   info?: IResponseInfo;
   results?: IEpisodeItem[];
 }
+
+export interface IEpisodesListAPI {
+  page?: number;
+  name?: string;
+}
