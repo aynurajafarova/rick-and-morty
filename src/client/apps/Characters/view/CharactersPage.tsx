@@ -65,6 +65,24 @@ const CharactersPage: FC<IProps> = ({
     resetSingleCharacter();
   };
 
+  const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => {
+    setParams((prevState: ICharactersListAPI) => {
+      return {
+        ...prevState,
+        name: event.target.value,
+      };
+    });
+  };
+
+  const handleChangeSpecies = (event: ChangeEvent<HTMLInputElement>) => {
+    setParams((prevState: ICharactersListAPI) => {
+      return {
+        ...prevState,
+        species: event.target.value,
+      };
+    });
+  };
+
   const handleChangeGender = (
     event: ChangeEvent<HTMLInputElement>,
     value: ISelectOption
@@ -98,8 +116,8 @@ const CharactersPage: FC<IProps> = ({
   return (
     <>
       <Box sx={{ display: "flex", marginTop: 3, marginBottom: 6 }}>
-        <Input label="Name" />
-        <Input label="Species" />
+        <Input label="Name" onChange={handleChangeName} />
+        <Input label="Species" onChange={handleChangeSpecies} />
         <Select
           options={statusOptions}
           label="Status"
