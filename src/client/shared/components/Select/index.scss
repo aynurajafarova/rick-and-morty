@@ -1,0 +1,40 @@
+@import "../../../shared/assets/styles/variables";
+
+%common-border-style {
+  border: 1px solid var(--primary-light-gray);
+}
+
+%common-text-color {
+  color: var(--primary-light-gray);
+}
+
+.rick-and-morty {
+  &__select {
+    width: 200px;
+    margin: 0 10px;
+    fieldset {
+      &:focus-visible {
+        outline: none;
+      }
+    }
+    .MuiOutlinedInput-notchedOutline {
+      @extend %common-border-style;
+    }
+    label {
+      @extend %common-text-color;
+    }
+    .css-1kty9di-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
+      color: var(--primary-light-gray);
+    }
+    .css-154xyx0-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused
+      .MuiOutlinedInput-notchedOutline {
+      @extend %common-border-style;
+    }
+    svg {
+      fill: var(--primary-light-gray);
+    }
+    input {
+      @extend %common-text-color;
+    }
+  }
+}

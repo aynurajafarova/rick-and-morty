@@ -5,7 +5,7 @@ import { Box, Grid } from "@mui/material";
 import { fetchCharactersList, fetchSingleCharacter } from "../api";
 import { ICharacterItem, ICharacters, ICharactersListAPI } from "../models";
 import CharacterCard from "../components/CharacterCard";
-import { IAction } from "../../../shared/models";
+import { IAction, ISelectOption } from "../../../shared/models";
 import {
   ICharactersData,
   ICharactersState,
@@ -14,6 +14,7 @@ import Pagination from "../../../shared/components/Pagination/index";
 import CharacterModal from "../components/CharacterModal/index";
 import { resetSingleCharacter } from "../../../shared/redux/actions/charactersAction";
 import Loader from "../../../shared/components/Loader";
+import Select from "../../../shared/components/Select";
 
 interface IProps {
   fetchCharactersList(
@@ -44,6 +45,19 @@ const CharactersPage: FC<IProps> = ({
     gender: "",
   });
 
+  const statusOptions: ISelectOption[] = [
+    { key: "alive", label: "Alive" },
+    { key: "dead", label: "Dead" },
+    { key: "unknown", label: "Unknown" },
+  ];
+
+  const genderOptions: ISelectOption[] = [
+    { key: "female", label: "Female" },
+    { key: "male", label: "Male" },
+    { key: "genderless", label: "Genderless" },
+    { key: "unknown", label: "Unknown" },
+  ];
+
   const handleOpen = () => setOpen(true);
 
   const handleClose = () => {
@@ -61,6 +75,10 @@ const CharactersPage: FC<IProps> = ({
         <Loader />
       ) : (
         <>
+          <Box sx={{ display: "flex", marginTop: 3, marginBottom: 6 }}>
+            <Select options={statusOptions} label="Status" />
+            <Select options={genderOptions} label="Gender" />
+          </Box>
           <Box sx={{ flexGrow: 1 }} className="rick-and-morty__characters">
             <Grid container spacing={2}>
               {characters?.results?.map(
