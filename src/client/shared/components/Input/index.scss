@@ -1,0 +1,13 @@
+@import "../../assets/styles/variables";
+
+.rick-and-morty {
+  &__input {
+    margin: 0 10px;
+    input {
+      padding: 10px 14px;
+    }
+    label {
+      top: -6px;
+    }
+  }
+}

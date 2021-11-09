@@ -77,7 +77,8 @@ const CharactersPage: FC<IProps> = ({
       ) : (
         <>
           <Box sx={{ display: "flex", marginTop: 3, marginBottom: 6 }}>
-            <Input />
+            <Input label="Name" />
+            <Input label="Species" />
             <Select options={statusOptions} label="Status" />
             <Select options={genderOptions} label="Gender" />
           </Box>
