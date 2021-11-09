@@ -72,7 +72,7 @@ const CharactersPage: FC<IProps> = ({
     setParams((prevState: ICharactersListAPI) => {
       return {
         ...prevState,
-        gender: value?.key,
+        gender: value?.key || "",
       };
     });
   };
@@ -84,7 +84,7 @@ const CharactersPage: FC<IProps> = ({
     setParams((prevState: ICharactersListAPI) => {
       return {
         ...prevState,
-        status: value?.key,
+        status: value?.key || "",
       };
     });
   };
@@ -97,24 +97,24 @@ const CharactersPage: FC<IProps> = ({
 
   return (
     <>
+      <Box sx={{ display: "flex", marginTop: 3, marginBottom: 6 }}>
+        <Input label="Name" />
+        <Input label="Species" />
+        <Select
+          options={statusOptions}
+          label="Status"
+          onChange={handleChangeStatus}
+        />
+        <Select
+          options={genderOptions}
+          label="Gender"
+          onChange={handleChangeGender}
+        />
+      </Box>
       {loading ? (
         <Loader />
       ) : (
         <>
-          <Box sx={{ display: "flex", marginTop: 3, marginBottom: 6 }}>
-            <Input label="Name" />
-            <Input label="Species" />
-            <Select
-              options={statusOptions}
-              label="Status"
-              onChange={handleChangeStatus}
-            />
-            <Select
-              options={genderOptions}
-              label="Gender"
-              onChange={handleChangeGender}
-            />
-          </Box>
           <Box sx={{ flexGrow: 1 }} className="rick-and-morty__characters">
             <Grid container spacing={2}>
               {characters?.results?.map(
