@@ -3,7 +3,7 @@ import { Box, Grid } from "@mui/material";
 
 import { IAction } from "../../../../shared/models";
 import { ICharacterItem, ICharacters } from "../../models";
-import CharacterCard from "./CharacterCard";
+import CharacterCard from "./CharacterCard/index";
 
 interface IProps {
   characters: ICharacters;
@@ -11,7 +11,7 @@ interface IProps {
   fetchSingleCharacter(id: number): (dispatch: Dispatch<IAction>) => void;
 }
 
-const Characters: FC<IProps> = ({
+const CharactersList: FC<IProps> = ({
   characters,
   handleOpen,
   fetchSingleCharacter,
@@ -39,4 +39,4 @@ const Characters: FC<IProps> = ({
   );
 };
 
-export default Characters;
+export default CharactersList;
